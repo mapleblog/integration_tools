@@ -4,7 +4,7 @@ import { useState, FormEvent } from "react";
 import { Header } from "@/components/shared/header";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { FileText, Layers, Scissors, Languages, Sigma, ArrowRight, Search, X } from "lucide-react";
+import { FileText, Layers, Scissors, Languages, Sigma, ArrowRight, Search, X, Film } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -58,6 +58,11 @@ const tools = [
     name: "Text Translator",
     keywords: ["translate", "translation", "text"],
     href: "/tools/text-translator",
+  },
+  {
+    name: "Chinese Pinyin Helper",
+    keywords: ["chinese", "hanzi", "pinyin", "zh"],
+    href: "/tools/hanzi-pinyin",
   },
   {
     name: "Unit Converter",
@@ -297,18 +302,6 @@ export default function Home() {
                   </div>
                   <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-pink-500" />
                 </Link>
-                <Link
-                  href="/tools/video-to-gif"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
-                >
-                  <div>
-                    <div className="font-medium">Video to GIF</div>
-                    <div className="text-xs text-muted-foreground mt-0.5">
-                      Convert short video clips into animated GIFs.
-                    </div>
-                  </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-pink-500" />
-                </Link>
               </CardContent>
             </Card>
 
@@ -336,6 +329,34 @@ export default function Home() {
                     </div>
                   </div>
                   <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-emerald-500" />
+                </Link>
+              </CardContent>
+            </Card>
+
+            <Card className="group relative overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-card/80 via-card/70 to-background/60 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-rose-500/50 hover:shadow-lg">
+              <CardHeader className="flex flex-row items-start gap-3 pb-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-rose-500/15 text-rose-500">
+                  <Film className="h-5 w-5" />
+                </div>
+                <div>
+                  <CardTitle className="text-base">Video Tools</CardTitle>
+                  <CardDescription className="text-xs md:text-sm">
+                    Convert and optimize your video clips.
+                  </CardDescription>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-1.5 pt-0">
+                <Link
+                  href="/tools/video-to-gif"
+                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                >
+                  <div>
+                    <div className="font-medium">Video to GIF</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">
+                      Convert short video clips into animated GIFs.
+                    </div>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-rose-500" />
                 </Link>
               </CardContent>
             </Card>
@@ -413,6 +434,18 @@ export default function Home() {
                     <div className="font-medium">Regex Tester</div>
                     <div className="text-xs text-muted-foreground mt-0.5">
                       Experiment with regular expressions and visualize matches.
+                    </div>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-emerald-500" />
+                </Link>
+                <Link
+                  href="/tools/hanzi-pinyin"
+                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                >
+                  <div>
+                    <div className="font-medium">Chinese Pinyin Helper</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">
+                      Lookup Pinyin for Chinese characters or find characters by Pinyin.
                     </div>
                   </div>
                   <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-emerald-500" />
