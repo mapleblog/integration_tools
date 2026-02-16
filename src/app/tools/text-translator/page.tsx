@@ -9,14 +9,14 @@ import { toast } from "sonner";
 import Link from "next/link";
 
 const languages = [
-  { value: "auto", label: "自动检测" },
-  { value: "zh", label: "中文" },
+  { value: "auto", label: "Auto detect" },
+  { value: "zh", label: "Chinese" },
   { value: "en", label: "English" },
-  { value: "ja", label: "日本語" },
-  { value: "ko", label: "한국어" },
-  { value: "vi", label: "Tiếng Việt" },
-  { value: "fr", label: "Français" },
-  { value: "de", label: "Deutsch" },
+  { value: "ja", label: "Japanese" },
+  { value: "ko", label: "Korean" },
+  { value: "vi", label: "Vietnamese" },
+  { value: "fr", label: "French" },
+  { value: "de", label: "German" },
 ];
 
 export default function TextTranslatorPage() {
@@ -160,7 +160,7 @@ export default function TextTranslatorPage() {
       } catch (error: unknown) {
         const message = error instanceof Error ? error.message : String(error);
         console.error(error);
-        toast.error(message || "翻译失败，请稍后重试");
+        toast.error(message || "Translation failed, please try again later");
       } finally {
         if (!aborted) {
         }
@@ -192,17 +192,17 @@ export default function TextTranslatorPage() {
               Text Translator
             </h1>
             <p className="text-muted-foreground text-sm md:text-base">
-              输入文本并选择目标语言，可一次翻译为最多两种语言。
+              Enter text and choose target languages to translate into up to two languages at once.
             </p>
           </div>
 
         <div className="grid lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1.75fr)] gap-5 items-start">
           <div className="space-y-3">
             <div className="space-y-1">
-              <p className="text-sm font-medium">源语言</p>
+              <p className="text-sm font-medium">Source language</p>
               <Select value={sourceLang} onValueChange={setSourceLang}>
                 <SelectTrigger className="w-40">
-                  <SelectValue placeholder="选择源语言" />
+                  <SelectValue placeholder="Choose source language" />
                 </SelectTrigger>
                 <SelectContent>
                   {languages.map((lang) => (
@@ -217,7 +217,7 @@ export default function TextTranslatorPage() {
             <Textarea
               value={sourceText}
               onChange={(e) => setSourceText(e.target.value)}
-              placeholder="在此输入或粘贴需要翻译的文本"
+              placeholder="Type or paste the text you want to translate here"
               className="resize-none h-60 md:h-72"
             />
           </div>
@@ -225,11 +225,11 @@ export default function TextTranslatorPage() {
           <div className="space-y-3.5">
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-1">
-                <p className="text-sm font-medium">目标语言 1（必选）</p>
+                <p className="text-sm font-medium">Target language 1 (required)</p>
                 <div className="flex items-center gap-2">
                   <Select value={targetLang} onValueChange={setTargetLang}>
                     <SelectTrigger className="w-40">
-                      <SelectValue placeholder="选择目标语言" />
+                      <SelectValue placeholder="Choose target language" />
                     </SelectTrigger>
                     <SelectContent>
                       {languages
@@ -245,7 +245,7 @@ export default function TextTranslatorPage() {
                     type="button"
                     onClick={handleApplyTarget1ToSource}
                     className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-input bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                    aria-label="将目标语言 1 结果作为源文本"
+                    aria-label="Use result of target language 1 as source text"
                   >
                     <ArrowLeftRight className="h-4 w-4" />
                   </button>
@@ -254,7 +254,7 @@ export default function TextTranslatorPage() {
 
               <div className="space-y-1">
                 <p className="text-sm font-medium">
-                  目标语言 2（可选）
+                  Target language 2 (optional)
                 </p>
                 <div className="flex items-center gap-2">
                   <Select
@@ -262,10 +262,10 @@ export default function TextTranslatorPage() {
                     onValueChange={setTargetLang2}
                   >
                     <SelectTrigger className="w-40">
-                      <SelectValue placeholder="选择目标语言 2" />
+                      <SelectValue placeholder="Choose target language 2" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="none">不使用</SelectItem>
+                      <SelectItem value="none">Not used</SelectItem>
                       {languages
                         .filter(
                           (lang) =>
@@ -283,7 +283,7 @@ export default function TextTranslatorPage() {
                     type="button"
                     onClick={handleApplyTarget2ToSource}
                     className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-input bg-background text-muted-foreground hover:bg-accent hover:text-accent-foreground"
-                    aria-label="将目标语言 2 结果作为源文本"
+                    aria-label="Use result of target language 2 as source text"
                   >
                     <ArrowLeftRight className="h-4 w-4" />
                   </button>
@@ -295,7 +295,7 @@ export default function TextTranslatorPage() {
               <Textarea
                 value={translatedText}
                 readOnly
-                placeholder="翻译结果将在这里显示"
+                placeholder="Translation result will appear here"
                 className="resize-none h-60 md:h-72"
               />
 
@@ -304,8 +304,8 @@ export default function TextTranslatorPage() {
                 readOnly
                 placeholder={
                   targetLang2 === "none"
-                    ? "选择右侧语言后，将在此显示第二个翻译结果"
-                    : "翻译结果将在这里显示"
+                    ? "After choosing the language on the right, the second translation result will appear here"
+                    : "Translation result will appear here"
                 }
                 className="resize-none h-60 md:h-72"
               />

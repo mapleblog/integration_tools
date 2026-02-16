@@ -140,7 +140,7 @@ export default function WatermarkRemoverPage() {
   const handleProcess = async () => {
     if (!file) return;
     if (!selection) {
-      toast.error("请在图片上拖动选择需要去除水印的区域");
+      toast.error("Please drag on the image to select the area where you want to remove the watermark");
       return;
     }
 
@@ -258,7 +258,7 @@ export default function WatermarkRemoverPage() {
                     onFilesAccepted={handleFilesAccepted}
                     maxFiles={1}
                     accept={{ "image/*": [".png", ".jpg", ".jpeg", ".webp"] }}
-                    description="拖拽或点击上传一张图片"
+                    description="Drag & drop or click to upload an image"
                     className="h-full"
                   />
                 ) : (
@@ -312,7 +312,7 @@ export default function WatermarkRemoverPage() {
             </Button>
 
             <p className="text-xs text-muted-foreground">
-              在左侧图片上拖动鼠标框选水印区域，系统会自动对该区域进行模糊覆盖处理。
+              Drag to select the watermark area on the left image; the system will automatically blur and cover that region.
             </p>
           </div>
 
@@ -328,7 +328,7 @@ export default function WatermarkRemoverPage() {
                   />
                 ) : (
                   <div className="text-muted-foreground text-center">
-                    <p>处理后的图片会显示在这里</p>
+                    <p>The processed image will appear here</p>
                   </div>
                 )}
               </CardContent>

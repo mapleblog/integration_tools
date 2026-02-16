@@ -11,10 +11,10 @@ import { toast } from "sonner";
 import Link from "next/link";
 
 const errorLevels = [
-  { value: "L", label: "L（7% 容错）" },
-  { value: "M", label: "M（15% 容错）" },
-  { value: "Q", label: "Q（25% 容错）" },
-  { value: "H", label: "H（30% 容错）" },
+  { value: "L", label: "L (7% error correction)" },
+  { value: "M", label: "M (15% error correction)" },
+  { value: "Q", label: "Q (25% error correction)" },
+  { value: "H", label: "H (30% error correction)" },
 ];
 
 export default function QrGeneratorPage() {
@@ -34,12 +34,12 @@ export default function QrGeneratorPage() {
 
   const handleGenerate = async () => {
     if (!text.trim()) {
-      toast.error("请输入要生成二维码的文本或链接");
+      toast.error("Please enter the text or link to generate a QR code");
       return;
     }
 
     setIsProcessing(true);
-    const toastId = toast.loading("正在生成二维码...");
+    const toastId = toast.loading("Generating QR code...");
 
     try {
       const formData = new FormData();
@@ -59,7 +59,7 @@ export default function QrGeneratorPage() {
       });
 
       if (!response.ok) {
-        let message = "生成二维码失败";
+        let message = "Failed to generate QR code";
         try {
           const errorData = await response.json();
           if (errorData?.message) {
@@ -77,10 +77,10 @@ export default function QrGeneratorPage() {
       }
       setQrUrl(url);
 
-      toast.success("二维码已生成", { id: toastId });
+      toast.success("QR code generated", { id: toastId });
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : String(error);
-      toast.error(message || "生成二维码时发生错误", { id: toastId });
+      toast.error(message || "An error occurred while generating the QR code", { id: toastId });
     } finally {
       setIsProcessing(false);
     }
@@ -114,7 +114,7 @@ export default function QrGeneratorPage() {
             QR Code Generator
           </h1>
           <p className="text-muted-foreground text-sm md:text-base">
-            输入任意文本或链接，一键生成高清二维码，支持下载保存。
+            Enter any text or link to generate a high-quality QR code and download it.
           </p>
         </div>
 
@@ -122,17 +122,17 @@ export default function QrGeneratorPage() {
           <Card className="h-full">
             <CardContent className="p-5 space-y-3">
               <div className="space-y-1.5">
-                <p className="text-sm font-medium">文本或链接</p>
+                <p className="text-sm font-medium">Text or link</p>
                 <Input
                   value={text}
                   onChange={(e) => setText(e.target.value)}
-                  placeholder="例如：https://example.com 或 任意文本"
+                  placeholder="E.g. https://example.com or any text"
                 />
               </div>
 
               <div className="flex flex-wrap items-end gap-3">
                 <div className="space-y-1.5">
-                  <p className="text-sm font-medium">尺寸</p>
+                  <p className="text-sm font-medium">Size</p>
                   <Input
                     type="number"
                     min={64}
@@ -144,10 +144,10 @@ export default function QrGeneratorPage() {
                 </div>
 
                 <div className="space-y-1.5">
-                  <p className="text-sm font-medium">容错等级</p>
+                  <p className="text-sm font-medium">Error correction level</p>
                   <Select value={errorLevel} onValueChange={setErrorLevel}>
                     <SelectTrigger className="w-36">
-                      <SelectValue placeholder="选择容错等级" />
+                      <SelectValue placeholder="Choose error correction level" />
                     </SelectTrigger>
                     <SelectContent>
                       {errorLevels.map((level) => (
@@ -161,7 +161,7 @@ export default function QrGeneratorPage() {
               </div>
 
               <p className="text-xs text-muted-foreground">
-                建议尺寸 160 - 384 像素；容错等级越高，对遮挡和污损越不敏感。
+                Recommended size 160–384 px; higher error correction levels are more robust to occlusion and damage.
               </p>
 
               <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between pt-1">
@@ -179,7 +179,7 @@ export default function QrGeneratorPage() {
                   ) : (
                     <>
                       <QrCode className="mr-2 h-4 w-4" />
-                      生成二维码
+                      Generate QR code
                     </>
                   )}
                 </Button>
@@ -198,7 +198,7 @@ export default function QrGeneratorPage() {
                   />
                 ) : (
                   <div className="text-xs text-muted-foreground text-center px-4">
-                    生成后的二维码会显示在这里。请输入文本并点击“生成二维码”按钮。
+                    The generated QR code will appear here. Enter text and click the “Generate QR code” button.
                   </div>
                 )}
               </div>
@@ -211,7 +211,7 @@ export default function QrGeneratorPage() {
                 className="w-full md:w-auto mt-1"
               >
                 <Download className="h-4 w-4 mr-1" />
-                下载 PNG
+                Download PNG
               </Button>
             </CardContent>
           </Card>

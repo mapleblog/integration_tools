@@ -1,5 +1,6 @@
 import { BaseToolExecutor } from "./base-executor";
 import { PdfMergerExecutor } from "./pdf-merger";
+import { PdfSplitterExecutor } from "./pdf-splitter";
 import { BgRemoverExecutor } from "./bg-remover";
 import { ImageCompressorExecutor } from "./image-compressor";
 import { FileArchiverExecutor } from "./file-archiver";
@@ -7,7 +8,7 @@ import { WatermarkRemoverExecutor } from "./watermark-remover";
 import { TextTranslatorExecutor } from "./text-translator";
 import { QrGeneratorExecutor } from "./qr-generator";
 
-type ToolCategory = "pdf" | "image" | "file" | "text";
+type ToolCategory = "pdf" | "image" | "file" | "text" | "utility";
 
 export type ToolMetadata = {
   id: string;
@@ -66,51 +67,58 @@ export class ToolRegistry {
 export function initializeTools() {
   if (ToolRegistry.getAllIds().length === 0) {
     ToolRegistry.register(new PdfMergerExecutor(), {
-      name: "PDF 合并",
+      name: "PDF merge",
       category: "pdf",
-      description: "将多个 PDF 文件合并为一个文档",
+      description: "Merge multiple PDF files into a single document",
+      aiExposed: true,
+    });
+
+    ToolRegistry.register(new PdfSplitterExecutor(), {
+      name: "PDF split",
+      category: "pdf",
+      description: "Extract specific page ranges into a new PDF document",
       aiExposed: true,
     });
 
     ToolRegistry.register(new BgRemoverExecutor(), {
-      name: "背景移除",
+      name: "Background remover",
       category: "image",
-      description: "移除图片背景并输出透明背景图像",
+      description: "Remove image backgrounds and output transparent images",
       aiExposed: true,
     });
 
     ToolRegistry.register(new ImageCompressorExecutor(), {
-      name: "图片压缩",
+      name: "Image compressor",
       category: "image",
-      description: "压缩图片体积并尽量保持画质",
+      description: "Compress image size while preserving quality as much as possible",
       aiExposed: true,
     });
 
     ToolRegistry.register(new WatermarkRemoverExecutor(), {
-      name: "去除水印",
+      name: "Watermark remover",
       category: "image",
-      description: "模糊覆盖指定区域以去除图片水印",
+      description: "Blur and cover specified regions to remove image watermarks",
       aiExposed: true,
     });
 
     ToolRegistry.register(new FileArchiverExecutor(), {
-      name: "文件打包",
+      name: "File archiver",
       category: "file",
-      description: "将多个文件打包为一个 ZIP 压缩包",
+      description: "Bundle multiple files into a single ZIP archive",
       aiExposed: true,
     });
 
     ToolRegistry.register(new TextTranslatorExecutor(), {
-      name: "文字翻译",
+      name: "Text translator",
       category: "text",
-      description: "将文本从一种语言翻译为另一种语言",
+      description: "Translate text from one language to another",
       aiExposed: true,
     });
 
     ToolRegistry.register(new QrGeneratorExecutor(), {
-      name: "二维码生成",
-      category: "image",
-      description: "将文本或链接生成二维码图片",
+      name: "QR code generator",
+      category: "utility",
+      description: "Generate a QR code image from text or links",
       aiExposed: true,
     });
   }

@@ -25,6 +25,14 @@ export function planTool(prompt: string, tools: ToolMetadata[]): PlannedToolCall
     if (lower.includes("合并") || lower.includes("merge") || lower.includes("combine")) {
       return { toolId: findByIdOrCategory("pdf-merger", "pdf") };
     }
+    if (
+      lower.includes("拆分") ||
+      lower.includes("分割") ||
+      lower.includes("split") ||
+      lower.includes("extract pages")
+    ) {
+      return { toolId: findByIdOrCategory("pdf-splitter", "pdf") };
+    }
     return { toolId: findByIdOrCategory("pdf-merger", "pdf") };
   }
 

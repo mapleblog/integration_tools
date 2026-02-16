@@ -124,3 +124,44 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes rainbow-border {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.rainbow-border {
+  background-image: linear-gradient(
+    90deg,
+    #ff0040,
+    #ff7a00,
+    #ffd600,
+    #00d26a,
+    #00b8ff,
+    #4f46e5,
+    #a855f7,
+    #ff0040
+  );
+  background-size: 200% 200%;
+  animation: rainbow-border 4s linear infinite;
+  box-shadow: 0 0 12px rgba(255, 0, 128, 0.45);
+}
+
+.dark .rainbow-border {
+  background-image: linear-gradient(
+    90deg,
+    #ef4444,
+    #f97316,
+    #facc15,
+    #22c55e,
+    #0ea5e9,
+    #6366f1,
+    #a855f7,
+    #ef4444
+  );
+  box-shadow: none;
+}

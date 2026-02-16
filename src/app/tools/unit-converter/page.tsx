@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Header } from "@/components/shared/header";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -39,100 +39,100 @@ type UnitCategory = {
 const unitCategories: UnitCategory[] = [
   {
     key: "length",
-    name: "长度",
+    name: "Length",
     baseUnit: "m",
     type: "factor",
     units: [
-      { key: "mm", label: "毫米", symbol: "mm", factor: 0.001 },
-      { key: "cm", label: "厘米", symbol: "cm", factor: 0.01 },
-      { key: "m", label: "米", symbol: "m", factor: 1 },
-      { key: "km", label: "千米", symbol: "km", factor: 1000 },
-      { key: "inch", label: "英寸", symbol: "in", factor: 0.0254 },
-      { key: "ft", label: "英尺", symbol: "ft", factor: 0.3048 },
+      { key: "mm", label: "Millimeter", symbol: "mm", factor: 0.001 },
+      { key: "cm", label: "Centimeter", symbol: "cm", factor: 0.01 },
+      { key: "m", label: "Meter", symbol: "m", factor: 1 },
+      { key: "km", label: "Kilometer", symbol: "km", factor: 1000 },
+      { key: "inch", label: "Inch", symbol: "in", factor: 0.0254 },
+      { key: "ft", label: "Foot", symbol: "ft", factor: 0.3048 },
     ],
   },
   {
     key: "weight",
-    name: "重量",
+    name: "Weight",
     baseUnit: "kg",
     type: "factor",
     units: [
-      { key: "mg", label: "毫克", symbol: "mg", factor: 0.000001 },
-      { key: "g", label: "克", symbol: "g", factor: 0.001 },
-      { key: "kg", label: "千克", symbol: "kg", factor: 1 },
-      { key: "t", label: "吨", symbol: "t", factor: 1000 },
-      { key: "lb", label: "磅", symbol: "lb", factor: 0.45359237 },
-      { key: "oz", label: "盎司", symbol: "oz", factor: 0.0283495231 },
+      { key: "mg", label: "Milligram", symbol: "mg", factor: 0.000001 },
+      { key: "g", label: "Gram", symbol: "g", factor: 0.001 },
+      { key: "kg", label: "Kilogram", symbol: "kg", factor: 1 },
+      { key: "t", label: "Ton", symbol: "t", factor: 1000 },
+      { key: "lb", label: "Pound", symbol: "lb", factor: 0.45359237 },
+      { key: "oz", label: "Ounce", symbol: "oz", factor: 0.0283495231 },
     ],
   },
   {
     key: "temperature",
-    name: "温度",
+    name: "Temperature",
     baseUnit: "C",
     type: "custom",
     units: [
-      { key: "C", label: "摄氏度", symbol: "°C" },
-      { key: "F", label: "华氏度", symbol: "°F" },
-      { key: "K", label: "开尔文", symbol: "K" },
+      { key: "C", label: "Celsius", symbol: "°C" },
+      { key: "F", label: "Fahrenheit", symbol: "°F" },
+      { key: "K", label: "Kelvin", symbol: "K" },
     ],
   },
   {
     key: "area",
-    name: "面积",
+    name: "Area",
     baseUnit: "m2",
     type: "factor",
     units: [
-      { key: "cm2", label: "平方厘米", symbol: "cm²", factor: 0.0001 },
-      { key: "m2", label: "平方米", symbol: "m²", factor: 1 },
-      { key: "km2", label: "平方千米", symbol: "km²", factor: 1000000 },
-      { key: "acre", label: "英亩", symbol: "acre", factor: 4046.8564224 },
+      { key: "cm2", label: "Square centimeter", symbol: "cm²", factor: 0.0001 },
+      { key: "m2", label: "Square meter", symbol: "m²", factor: 1 },
+      { key: "km2", label: "Square kilometer", symbol: "km²", factor: 1000000 },
+      { key: "acre", label: "Acre", symbol: "acre", factor: 4046.8564224 },
     ],
   },
   {
     key: "volume",
-    name: "体积",
+    name: "Volume",
     baseUnit: "L",
     type: "factor",
     units: [
-      { key: "ml", label: "毫升", symbol: "mL", factor: 0.001 },
-      { key: "L", label: "升", symbol: "L", factor: 1 },
-      { key: "m3", label: "立方米", symbol: "m³", factor: 1000 },
-      { key: "gal", label: "加仑（美制）", symbol: "gal", factor: 3.785411784 },
+      { key: "ml", label: "Milliliter", symbol: "mL", factor: 0.001 },
+      { key: "L", label: "Liter", symbol: "L", factor: 1 },
+      { key: "m3", label: "Cubic meter", symbol: "m³", factor: 1000 },
+      { key: "gal", label: "Gallon (US)", symbol: "gal", factor: 3.785411784 },
     ],
   },
   {
     key: "speed",
-    name: "速度",
+    name: "Speed",
     baseUnit: "m_s",
     type: "factor",
     units: [
-      { key: "m_s", label: "米/秒", symbol: "m/s", factor: 1 },
-      { key: "km_h", label: "千米/小时", symbol: "km/h", factor: 0.277777778 },
-      { key: "mph", label: "英里/小时", symbol: "mph", factor: 0.44704 },
-      { key: "kn", label: "节", symbol: "kn", factor: 0.514444 },
+      { key: "m_s", label: "Meters per second", symbol: "m/s", factor: 1 },
+      { key: "km_h", label: "Kilometers per hour", symbol: "km/h", factor: 0.277777778 },
+      { key: "mph", label: "Miles per hour", symbol: "mph", factor: 0.44704 },
+      { key: "kn", label: "Knots", symbol: "kn", factor: 0.514444 },
     ],
   },
   {
     key: "storage",
-    name: "数据存储",
+    name: "Data storage",
     baseUnit: "B",
     type: "factor",
     units: [
-      { key: "bit", label: "比特", symbol: "bit", factor: 0.125 },
-      { key: "B", label: "字节", symbol: "B", factor: 1 },
-      { key: "KB", label: "千字节", symbol: "KB", factor: 1024 },
-      { key: "MB", label: "兆字节", symbol: "MB", factor: 1048576 },
-      { key: "GB", label: "吉字节", symbol: "GB", factor: 1073741824 },
-      { key: "TB", label: "太字节", symbol: "TB", factor: 1099511627776 },
+      { key: "bit", label: "Bit", symbol: "bit", factor: 0.125 },
+      { key: "B", label: "Byte", symbol: "B", factor: 1 },
+      { key: "KB", label: "Kilobyte", symbol: "KB", factor: 1024 },
+      { key: "MB", label: "Megabyte", symbol: "MB", factor: 1048576 },
+      { key: "GB", label: "Gigabyte", symbol: "GB", factor: 1073741824 },
+      { key: "TB", label: "Terabyte", symbol: "TB", factor: 1099511627776 },
     ],
   },
 ];
 
 function formatUnitLabel(unit: SimpleUnit) {
   if (unit.symbol && unit.symbol !== unit.key) {
-    return `${unit.label}（${unit.symbol}）`;
+    return `${unit.label} (${unit.symbol})`;
   }
-  return `${unit.label}（${unit.key}）`;
+  return `${unit.label} (${unit.key})`;
 }
 
 function convertFactorBased(
@@ -255,23 +255,23 @@ export default function UnitConverterPage() {
         <div className="space-y-1">
           <h1 className="text-2xl md:text-3xl font-bold tracking-tight flex items-center gap-3">
             <Sigma className="h-7 w-7 text-emerald-500" />
-            单位转换
+            Unit Converter
           </h1>
           <p className="text-muted-foreground text-sm md:text-base">
-            支持长度、重量、温度、面积、体积、速度、数据存储等常见单位的快速换算。
+            Quickly convert common units such as length, weight, temperature, area, volume, speed, and data storage.
           </p>
         </div>
 
         <Card>
           <CardContent className="p-5 space-y-5">
             <div className="space-y-1.5">
-              <p className="text-sm font-medium">转换类型</p>
+              <p className="text-sm font-medium">Conversion type</p>
               <Select
                 value={categoryKey}
                 onValueChange={(value) => handleCategoryChange(value as UnitCategoryKey)}
               >
                 <SelectTrigger className="w-full sm:w-64">
-                  <SelectValue placeholder="选择要转换的类型" />
+                  <SelectValue placeholder="Choose the type to convert" />
                 </SelectTrigger>
                 <SelectContent>
                   {unitCategories.map((category) => (
@@ -285,11 +285,11 @@ export default function UnitConverterPage() {
 
             <div className="grid md:grid-cols-[minmax(0,1.2fr)_auto_minmax(0,1.2fr)] gap-4 items-end">
               <div className="space-y-2">
-                <p className="text-sm font-medium">原始数值</p>
+                <p className="text-sm font-medium">Input value</p>
                 <Input
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
-                  placeholder="输入要转换的数值"
+                  placeholder="Enter the value to convert"
                 />
                 <Select
                   value={fromUnit.key}
@@ -321,8 +321,8 @@ export default function UnitConverterPage() {
               </div>
 
               <div className="space-y-2">
-                <p className="text-sm font-medium">转换结果</p>
-                <Input value={resultValue} readOnly placeholder="结果会显示在这里" />
+                <p className="text-sm font-medium">Result</p>
+                <Input value={resultValue} readOnly placeholder="The result will appear here" />
                 <Select
                   value={toUnit.key}
                   onValueChange={(value) => setToUnitKey(value)}
@@ -343,8 +343,9 @@ export default function UnitConverterPage() {
 
             <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
               <p className="text-[11px] text-muted-foreground md:text-xs">
-                数值变更或单位选择会自动计算结果。数值支持小数和科学计数法；
-                温度转换会自动处理 °C、°F 和 K 之间的非线性关系，数据存储以 1KB = 1024B 进行换算。
+                Changing the value or units automatically recalculates the result. Values support decimals and scientific
+                notation; temperature conversion correctly handles the non-linear relationship between °C, °F, and K, and
+                data storage uses 1 KB = 1024 B.
               </p>
             </div>
           </CardContent>
