@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // Used for migrations
+}
+
+enum ProcessStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  image         String?
+  history       History[]
+  stats         Stats?
+
+  @@map("users")
+}
+
+model History {
+  id           String        @id @default(cuid())
+  userId       String
+  toolId       String        // e.g., "pdf-merger", "bg-remover"
+  toolName     String
+  status       ProcessStatus @default(PENDING)
+  inputFileName String
+  outputFileName String?
+  fileUrl      String?       // Temporary Supabase Storage URL
+  metadata     Json?         // Tool-specific data: { "compressionRatio": "40%", "pages": 5 }
+  expiresAt    DateTime
+  createdAt    DateTime      @default(now())
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("history")
+}
+
+model Stats {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  totalUsed   Int      @default(0)
+  toolsBreakdown Json?   // { "pdf-merger": 10, "bg-remover": 2 }
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_stats")
+}
