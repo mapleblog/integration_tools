@@ -89,6 +89,16 @@ export function planTool(prompt: string, tools: ToolMetadata[]): PlannedToolCall
   }
 
   if (
+    lower.includes("视频转gif") ||
+    lower.includes("视频 转 gif") ||
+    lower.includes("video to gif") ||
+    lower.includes("mp4 to gif") ||
+    lower.includes("gif from video")
+  ) {
+    return { toolId: findByIdOrCategory("video-to-gif", "image") };
+  }
+
+  if (
     lower.includes("二维码") ||
     lower.includes("qr code") ||
     lower.includes("qrcode")
@@ -104,6 +114,7 @@ export function planTool(prompt: string, tools: ToolMetadata[]): PlannedToolCall
     "watermark-remover",
     "text-translator",
     "qr-generator",
+    "video-to-gif",
   ];
   for (const id of priority) {
     const exists = tools.find((tool) => tool.id === id);

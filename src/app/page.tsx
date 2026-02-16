@@ -35,9 +35,19 @@ const tools = [
     href: "/tools/watermark-remover",
   },
   {
+    name: "Video to GIF",
+    keywords: ["video", "gif", "convert", "video to gif"],
+    href: "/tools/video-to-gif",
+  },
+  {
     name: "QR Code Generator",
     keywords: ["qr", "qr code", "code"],
     href: "/tools/qr-generator",
+  },
+  {
+    name: "Regex Tester",
+    keywords: ["regex", "regular expression", "pattern", "match"],
+    href: "/tools/regex-tester",
   },
   {
     name: "File Archiver",
@@ -287,6 +297,18 @@ export default function Home() {
                   </div>
                   <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-pink-500" />
                 </Link>
+                <Link
+                  href="/tools/video-to-gif"
+                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                >
+                  <div>
+                    <div className="font-medium">Video to GIF</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">
+                      Convert short video clips into animated GIFs.
+                    </div>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-pink-500" />
+                </Link>
               </CardContent>
             </Card>
 
@@ -379,6 +401,18 @@ export default function Home() {
                     <div className="font-medium">QR Code Generator</div>
                     <div className="text-xs text-muted-foreground mt-0.5">
                       Turn text or links into a QR code instantly.
+                    </div>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-emerald-500" />
+                </Link>
+                <Link
+                  href="/tools/regex-tester"
+                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                >
+                  <div>
+                    <div className="font-medium">Regex Tester</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">
+                      Experiment with regular expressions and visualize matches.
                     </div>
                   </div>
                   <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-emerald-500" />

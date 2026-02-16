@@ -7,6 +7,7 @@ import { FileArchiverExecutor } from "./file-archiver";
 import { WatermarkRemoverExecutor } from "./watermark-remover";
 import { TextTranslatorExecutor } from "./text-translator";
 import { QrGeneratorExecutor } from "./qr-generator";
+import { VideoToGifExecutor } from "./video-to-gif";
 
 type ToolCategory = "pdf" | "image" | "file" | "text" | "utility";
 
@@ -119,6 +120,13 @@ export function initializeTools() {
       name: "QR code generator",
       category: "utility",
       description: "Generate a QR code image from text or links",
+      aiExposed: true,
+    });
+
+    ToolRegistry.register(new VideoToGifExecutor(), {
+      name: "Video to GIF",
+      category: "image",
+      description: "Convert a short video clip into an animated GIF",
       aiExposed: true,
     });
   }
