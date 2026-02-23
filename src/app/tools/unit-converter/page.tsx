@@ -185,7 +185,7 @@ export default function UnitConverterPage() {
       ?.units[1];
     setFromUnitKey(first?.key ?? "");
     setToUnitKey(second?.key ?? first?.key ?? "");
-    setResultValue("");
+    setInputValue("");
   };
 
   const handleSwap = () => {

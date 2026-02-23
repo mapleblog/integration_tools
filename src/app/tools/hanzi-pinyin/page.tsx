@@ -236,7 +236,7 @@ export default function HanziPinyinPage() {
     for (const ch of Array.from(trimmed)) {
       if (isHanzi(ch)) {
         const allPinyins = pinyin(ch, {
-          toneType: "mark",
+          toneType: "symbol",
           type: "array",
           multiple: true,
         });
@@ -309,7 +309,7 @@ export default function HanziPinyinPage() {
     }
 
     const rawPinyins = pinyin(first, {
-      toneType: "mark",
+      toneType: "symbol",
       type: "array",
       multiple: true,
     });
