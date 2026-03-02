@@ -33,9 +33,7 @@ export function Header() {
         <div className="flex items-center gap-3">
           <div className="hidden md:flex items-center gap-3">
             <ModeToggle />
-            <Button variant="ghost" size="sm" className="font-medium">
-              Sign In
-            </Button>
+
           </div>
 
           <div className="flex md:hidden items-center gap-2">
@@ -56,14 +54,7 @@ export function Header() {
                     <span>VersaTools</span>
                   </SheetTitle>
                 </SheetHeader>
-                <nav className="flex flex-col gap-3 mt-8">
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start text-lg h-12"
-                  >
-                    Sign In
-                  </Button>
-                </nav>
+
               </SheetContent>
             </Sheet>
           </div>

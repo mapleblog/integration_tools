@@ -55,6 +55,11 @@ const tools = [
     href: "/tools/file-archiver",
   },
   {
+    name: "File Diff",
+    keywords: ["diff", "compare", "file comparison", "text diff"],
+    href: "/tools/file-diff",
+  },
+  {
     name: "Text Translator",
     keywords: ["translate", "translation", "text"],
     href: "/tools/text-translator",
@@ -188,17 +193,14 @@ export default function Home() {
                 {filteredTools.length > 0 ? (
                   <div className="overflow-hidden rounded-xl border border-border/60 bg-popover/95 shadow-sm">
                     {filteredTools.map((tool) => (
-                      <button
+                      <Link
                         key={tool.href}
-                        type="button"
-                        onClick={() => {
-                          router.push(tool.href);
-                        }}
+                        href={tool.href}
                         className="flex w-full items-center justify-between px-3 py-2 text-sm hover:bg-muted/70"
                       >
                         <span>{tool.name}</span>
                         <ArrowRight className="h-3.5 w-3.5 text-muted-foreground" />
-                      </button>
+                      </Link>
                     ))}
                   </div>
                 ) : (
@@ -228,7 +230,7 @@ export default function Home() {
               <CardContent className="space-y-1.5 pt-0">
                 <Link
                   href="/tools/pdf-merger"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                  className="group flex items-center justify-between rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all hover:bg-muted/50 hover:border-border/50 hover:shadow-sm"
                 >
                   <div>
                     <div className="font-medium">PDF Merge</div>
@@ -236,11 +238,11 @@ export default function Home() {
                       Combine multiple PDF files into a single document.
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-orange-500" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-orange-500 transition-colors" />
                 </Link>
                 <Link
                   href="/tools/pdf-splitter"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                  className="group flex items-center justify-between rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all hover:bg-muted/50 hover:border-border/50 hover:shadow-sm"
                 >
                   <div>
                     <div className="font-medium">PDF Split</div>
@@ -248,7 +250,7 @@ export default function Home() {
                       Extract specific page ranges into a new PDF document.
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-rose-500" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-orange-500 transition-colors" />
                 </Link>
               </CardContent>
             </Card>
@@ -268,7 +270,7 @@ export default function Home() {
               <CardContent className="space-y-1.5 pt-0">
                 <Link
                   href="/tools/bg-remover"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                  className="group flex items-center justify-between rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all hover:bg-muted/50 hover:border-border/50 hover:shadow-sm"
                 >
                   <div>
                     <div className="font-medium">Background Remover</div>
@@ -276,11 +278,11 @@ export default function Home() {
                       Remove image backgrounds with one click using AI.
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-pink-500" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-pink-500 transition-colors" />
                 </Link>
                 <Link
                   href="/tools/image-compressor"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                  className="group flex items-center justify-between rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all hover:bg-muted/50 hover:border-border/50 hover:shadow-sm"
                 >
                   <div>
                     <div className="font-medium">Image Compressor</div>
@@ -288,11 +290,11 @@ export default function Home() {
                       Compress images to smaller size while preserving quality.
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-pink-500" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-pink-500 transition-colors" />
                 </Link>
                 <Link
                   href="/tools/watermark-remover"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                  className="group flex items-center justify-between rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all hover:bg-muted/50 hover:border-border/50 hover:shadow-sm"
                 >
                   <div>
                     <div className="font-medium">Watermark Remover</div>
@@ -300,7 +302,7 @@ export default function Home() {
                       Select areas to blur and cover unwanted watermarks.
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-pink-500" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-pink-500 transition-colors" />
                 </Link>
               </CardContent>
             </Card>
@@ -320,7 +322,7 @@ export default function Home() {
               <CardContent className="space-y-1.5 pt-0">
                 <Link
                   href="/tools/file-archiver"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                  className="group flex items-center justify-between rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all hover:bg-muted/50 hover:border-border/50 hover:shadow-sm"
                 >
                   <div>
                     <div className="font-medium">File Archiver</div>
@@ -328,7 +330,19 @@ export default function Home() {
                       Archive multiple files into a single ZIP package.
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-emerald-500" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-emerald-500 transition-colors" />
+                </Link>
+                <Link
+                  href="/tools/file-diff"
+                  className="group flex items-center justify-between rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all hover:bg-muted/50 hover:border-border/50 hover:shadow-sm"
+                >
+                  <div>
+                    <div className="font-medium">File Diff</div>
+                    <div className="text-xs text-muted-foreground mt-0.5">
+                      Compare two files or text snippets to find differences.
+                    </div>
+                  </div>
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-emerald-500 transition-colors" />
                 </Link>
               </CardContent>
             </Card>
@@ -348,7 +362,7 @@ export default function Home() {
               <CardContent className="space-y-1.5 pt-0">
                 <Link
                   href="/tools/video-to-gif"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                  className="group flex items-center justify-between rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all hover:bg-muted/50 hover:border-border/50 hover:shadow-sm"
                 >
                   <div>
                     <div className="font-medium">Video to GIF</div>
@@ -356,7 +370,7 @@ export default function Home() {
                       Convert short video clips into animated GIFs.
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-rose-500" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-rose-500 transition-colors" />
                 </Link>
               </CardContent>
             </Card>
@@ -376,7 +390,7 @@ export default function Home() {
               <CardContent className="space-y-1.5 pt-0">
                 <Link
                   href="/tools/text-translator"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                  className="group flex items-center justify-between rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all hover:bg-muted/50 hover:border-border/50 hover:shadow-sm"
                 >
                   <div>
                     <div className="font-medium">Text Translator</div>
@@ -384,14 +398,14 @@ export default function Home() {
                       Translate between multiple languages for work and daily use.
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-indigo-500" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-indigo-500 transition-colors" />
                 </Link>
               </CardContent>
             </Card>
 
-            <Card className="group relative overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-card/80 via-card/70 to-background/60 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-emerald-500/50 hover:shadow-lg">
+            <Card className="group relative overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-card/80 via-card/70 to-background/60 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-cyan-500/50 hover:shadow-lg">
               <CardHeader className="flex flex-row items-start gap-3 pb-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-500/15 text-emerald-500">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-500/15 text-cyan-500">
                   <Sigma className="h-5 w-5" />
                 </div>
                 <div>
@@ -404,7 +418,7 @@ export default function Home() {
               <CardContent className="space-y-1.5 pt-0">
                 <Link
                   href="/tools/unit-converter"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                  className="group flex items-center justify-between rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all hover:bg-muted/50 hover:border-border/50 hover:shadow-sm"
                 >
                   <div>
                     <div className="font-medium">Unit Converter</div>
@@ -412,11 +426,11 @@ export default function Home() {
                       Convert length, weight, temperature, and more in one place.
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-emerald-500" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-cyan-500 transition-colors" />
                 </Link>
                 <Link
                   href="/tools/qr-generator"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                  className="group flex items-center justify-between rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all hover:bg-muted/50 hover:border-border/50 hover:shadow-sm"
                 >
                   <div>
                     <div className="font-medium">QR Code Generator</div>
@@ -424,11 +438,11 @@ export default function Home() {
                       Turn text or links into a QR code instantly.
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-emerald-500" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-cyan-500 transition-colors" />
                 </Link>
                 <Link
                   href="/tools/regex-tester"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                  className="group flex items-center justify-between rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all hover:bg-muted/50 hover:border-border/50 hover:shadow-sm"
                 >
                   <div>
                     <div className="font-medium">Regex Tester</div>
@@ -436,11 +450,11 @@ export default function Home() {
                       Experiment with regular expressions and visualize matches.
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-emerald-500" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-cyan-500 transition-colors" />
                 </Link>
                 <Link
                   href="/tools/hanzi-pinyin"
-                  className="flex items-center justify-between rounded-lg px-3 py-2.5 text-sm hover:bg-muted/70 transition-colors"
+                  className="group flex items-center justify-between rounded-lg border border-transparent px-3 py-2.5 text-sm transition-all hover:bg-muted/50 hover:border-border/50 hover:shadow-sm"
                 >
                   <div>
                     <div className="font-medium">Chinese Pinyin Helper</div>
@@ -448,7 +462,7 @@ export default function Home() {
                       Lookup Pinyin for Chinese characters or find characters by Pinyin.
                     </div>
                   </div>
-                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-emerald-500" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-cyan-500 transition-colors" />
                 </Link>
               </CardContent>
             </Card>
